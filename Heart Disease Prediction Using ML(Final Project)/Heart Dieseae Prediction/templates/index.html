@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>❤️ Heart Disease Risk Predictor</h1>
+    <p class="subtitle">AI-based medical risk analysis dashboard</p>
+
+    <form action="/predict" method="post">
+
+        <!-- AGE -->
+        <div class="card">
+            <label>Age: <span id="ageVal">50</span></label>
+            <input type="range" name="age" min="1" max="100" value="50"
+                   oninput="ageVal.innerText = this.value">
+        </div>
+
+        <!-- SEX -->
+        <div class="card">
+            <label>Gender</label>
+            <select name="sex">
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+
+        <!-- CHEST PAIN -->
+        <div class="card">
+            <label>Chest Pain Type</label>
+            <select name="cp">
+                <option value="0">Typical Angina</option>
+                <option value="1">Atypical Angina</option>
+                <option value="2">Non-anginal</option>
+                <option value="3">Asymptomatic</option>
+            </select>
+        </div>
+
+        <!-- BLOOD PRESSURE -->
+        <div class="card">
+            <label>Resting Blood Pressure: <span id="bpVal">120</span></label>
+            <input type="range" name="trestbps" min="80" max="200" value="120"
+                   oninput="bpVal.innerText = this.value">
+        </div>
+
+        <!-- CHOLESTEROL -->
+        <div class="card">
+            <label>Cholesterol: <span id="cholVal">200</span></label>
+            <input type="range" name="chol" min="100" max="400" value="200"
+                   oninput="cholVal.innerText = this.value">
+        </div>
+
+        <!-- FBS -->
+        <div class="card">
+            <label>Fasting Blood Sugar</label>
+            <select name="fbs">
+                <option value="0">Normal</option>
+                <option value="1">High</option>
+            </select>
+        </div>
+
+        <!-- ECG -->
+        <div class="card">
+            <label>Rest ECG</label>
+            <select name="restecg">
+                <option value="0">Normal</option>
+                <option value="1">Abnormal</option>
+                <option value="2">Hypertrophy</option>
+            </select>
+        </div>
+
+        <!-- HEART RATE -->
+        <div class="card">
+            <label>Max Heart Rate: <span id="hrVal">150</span></label>
+            <input type="range" name="thalach" min="60" max="220" value="150"
+                   oninput="hrVal.innerText = this.value">
+        </div>
+
+        <!-- EXERCISE ANGINA -->
+        <div class="card">
+            <label>Exercise Induced Angina</label>
+            <select name="exang">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <!-- OLDPEAK -->
+        <div class="card">
+            <label>Oldpeak: <span id="opVal">1.0</span></label>
+            <input type="range" name="oldpeak" min="0" max="6" step="0.1" value="1"
+                   oninput="opVal.innerText = this.value">
+        </div>
+
+        <!-- SLOPE -->
+        <div class="card">
+            <label>Slope</label>
+            <select name="slope">
+                <option value="0">Upsloping</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping</option>
+            </select>
+        </div>
+
+        <!-- CA -->
+        <div class="card">
+            <label>Major Vessels (0–4)</label>
+            <input type="range" name="ca" min="0" max="4" value="0"
+                   oninput="caVal.innerText = this.value">
+            <span id="caVal">0</span>
+        </div>
+
+        <!-- THAL -->
+        <div class="card">
+            <label>Thalassemia</label>
+            <select name="thal">
+                <option value="0">Normal</option>
+                <option value="1">Fixed</option>
+                <option value="2">Reversible</option>
+            </select>
+        </div>
+
+        <button type="submit">🔍 Predict Risk</button>
+
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
